@@ -1,0 +1,28 @@
+package Aplicacion;
+
+import java.util.List;
+
+public class RedBarrel extends Barrel {
+
+	public RedBarrel(Posicion posi, String root) {
+		super(posi,30,root);
+	}
+	
+	@Override
+	public void move(List<Platform> plataformas, List<Stair> escaleras) {
+		while(movimiento) {
+			moveDown();
+		}
+	}
+	
+	public void moveDown() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[1]+2;
+		changePosition(valores[0], temporal);
+	}
+	
+	@Override
+	public void efecto(Player p) {
+		p.resteVida();
+	}
+}

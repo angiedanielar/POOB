@@ -1,0 +1,10 @@
+package Aplicacion;
+
+public class NormalStair extends Stair {
+
+	public NormalStair(Posicion abajoInicial, Posicion abajoFinal, Posicion arribaInicial, Posicion arribaFinal) {
+		super(abajoInicial, abajoFinal, arribaInicial, arribaFinal);
+		setBroken(false);
+	}
+
+}

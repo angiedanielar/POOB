@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ErrorMessage
+comment0.text=\r\n\ Informa\ al\ usuario\ que\ ha\ ocurrido\ un\ error.\r\n
+comment1.params=
+comment1.target=ErrorMessage()
+comment1.text=\r\n\ Constructor\ de\ objetos\ de\ la\ clase\ ErrorMessage.\r\n
+numComments=2

@@ -1,0 +1,14 @@
+package Aplicacion;
+
+public class Corazon extends Sorpresa {
+	public Corazon(Posicion posi, String root) {
+		super(posi,"corazon");
+	}
+	
+	public void efecto(Player p) {
+		if(isVisible()) {
+			p.sumeVida();
+			setVisible(false);
+		}		
+	}
+}

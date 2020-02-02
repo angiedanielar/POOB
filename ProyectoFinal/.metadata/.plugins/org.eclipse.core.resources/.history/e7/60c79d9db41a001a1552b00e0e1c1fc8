@@ -1,0 +1,51 @@
+package Aplicacion;
+
+import java.util.*;
+import java.awt.Rectangle;
+
+/**
+ * Crea la plataforma del juego
+ */
+public class Platform {
+	private List<Posicion> coordenadas;
+	private Rectangle hitBox;
+	private int tipo;
+	/**
+	 * Cosntructor de la plataforma
+	 */
+	public Platform(Posicion posiInicial, Posicion posiFinal, int tipo) {
+		coordenadas= new ArrayList<Posicion>();
+		coordenadas.add(posiInicial);
+		this.tipo= tipo;
+		coordenadas.add(posiFinal);
+		int posiY= posiInicial.getY()-20;
+		int ancho= Math.abs(posiFinal.getX() - posiInicial.getX());
+		int alto= Math.abs(posiInicial.getY()- posiY);
+		hitBox= new Rectangle(posiInicial.getX(), posiY, ancho, alto);
+	}
+	
+	/**
+	 * retorna las coordenas de la plataforma
+	 * @return coordenadas, devuelve las coordenadas de la lona actual
+	 */
+	public  List<Posicion> getCoordenadas(){
+		return coordenadas;
+	}
+	
+	/**
+	 * retorna si el hitbox esta en contacto con otro
+	 * @param r
+	 * @return
+	 */
+	public boolean intersecta(Rectangle r) {
+		return hitBox.intersects(r);
+	}
+	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
+	public int getTipo() {
+		return tipo;
+	}
+}

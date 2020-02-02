@@ -1,0 +1,11 @@
+package Aplicacion;
+
+public class Martillo extends Sorpresa {
+	public Martillo(Posicion posi, String root) {
+		super(posi,"martillo");
+	}
+	
+public void efecto(Player p) {
+		
+	}
+}

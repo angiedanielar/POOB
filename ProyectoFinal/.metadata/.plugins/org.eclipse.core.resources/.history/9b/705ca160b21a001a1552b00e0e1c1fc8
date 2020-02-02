@@ -1,0 +1,89 @@
+package Aplicacion;
+
+import java.awt.Rectangle;
+
+/**
+ * Crea la sorpresa del juego
+ */
+public abstract class Sorpresa {
+	private Posicion posicion;
+	private Rectangle hitBox;
+	private String name;
+	protected boolean visible;
+	
+	
+	/**
+	 * Constructor de la sorpresa
+	 */
+	public Sorpresa(Posicion posi, String name) {
+		posicion= posi;
+		visible = true;
+		this.name = name;
+		hitBox= new Rectangle(posicion.getCordenadas()[0], posicion.getCordenadas()[1],28,28);
+	}
+	
+	/**
+	 * El poder que tiene la sorpresa
+	 */
+	public abstract void efecto(Player p);
+	
+	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
+	public boolean intersecta(Rectangle r) {
+		return hitBox.intersects(r);
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * Hace visible o invisible a la sorpresa 
+	 */
+	public void setVisible(boolean v){
+		visible = v;
+	}
+	
+	/**
+	 * Dice si la sorpresa actual esta visible o no
+	 * @return visible, devuelve si la sorpresa es visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

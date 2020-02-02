@@ -1,0 +1,12 @@
+Actor Romeo 20 150
+Actor Julieta 90 150
+ActorNecio Homero 20 70
+ActorNecio Bard 90 70
+ActorPerezoso Edward 20 0
+ActorPerezoso Bella 90 0
+ActorEjemplar Ernesto 20 220
+ActorEjemplar Daniela 90 220
+Luz centralDerecha 240 250
+Luz centralIzquierda 260 250
+Escenografia Mobil 240 300 A
+Escenografia inMobil 260 300 false

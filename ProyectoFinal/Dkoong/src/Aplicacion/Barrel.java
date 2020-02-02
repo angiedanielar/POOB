@@ -1,0 +1,97 @@
+package Aplicacion;
+
+import java.awt.Rectangle;
+import java.util.*;
+
+/**
+ * Crea el barril del Juego 
+ */
+public abstract class Barrel {
+	protected Posicion posicion;
+	protected int estado;
+	protected Rectangle hitBox;
+	protected int points;
+	public static Posicion posicionInicial= new Posicion(130,150);
+	protected String root;
+	protected boolean movimiento;
+	protected boolean puedeBajar;
+	
+	
+	/**
+	 * Constructor del Barrel
+	 * @param posi, la posicion del barril
+	 * @param points, los puntos del barril
+	 * @param root, el sprite del barril
+	 */
+	public Barrel(Posicion posi,int points, String root) {
+		posicion= posi;
+		estado= 0;
+		this.points= points;
+		hitBox= new Rectangle(posi.getCordenadas()[0], posi.getCordenadas()[1],28,28);
+		movimiento= false;
+		puedeBajar= true;		
+	}
+	
+	/**
+	 * Obtiene la posicion del barril
+	 * @return posicion, Devuelve la posicion del barril
+	 */
+	public Posicion getPosicion() {
+		return posicion;
+	}
+	
+	/**
+	 * Devuelte el sprite actual del barril
+	 * @return root, el sprite a devolver
+	 */
+	public String getRoot() {
+		return root;
+	}
+	
+	/**
+	 * Actualiza el sprite del barril
+	 * @return root, el sprite
+	 */
+	public void setRoot(String r) {
+		root = r;
+	}
+	
+	/**
+	 * Cambia la posicion del barril
+	 * @param x, la coordenada en X a cambiar 
+	 * @param y, la coordenada en Y a cambiar 
+	 */
+	public void changePosition(int x, int y) {
+		posicion.changeCoordinadas(x, y);
+		hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+	}
+	
+	/**
+	 * Obtiene el hitBox del barril
+	 * @return hitBox, el rectangulo a devolver
+	 */
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
+	/**
+	 * Mira si se interseca con algun rectangulo
+	 * @return intersecta, si se intersecta o no 
+	 */
+	public boolean intersecta(Rectangle r) {
+		return hitBox.intersects(r);
+	}
+	
+	/**
+	 * Le da el efecto al barril sobre el jugador
+	 * @param p, el jugador sobre el cual aplica el efecto
+	 */
+	public abstract void efecto(Player p);
+	
+	/**
+	 * Mueve al barril segun el tipo
+	 * @param plataformas, la lista actual de las plataformas del tablero
+	 * @param escaleras, la lista actual de las escaleras del tablero 
+	 */
+	public abstract void move(List<Platform> plataformas, List<Stair> escaleras);
+}

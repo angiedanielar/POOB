@@ -1,0 +1,63 @@
+package Aplicacion;
+
+import java.util.List;
+
+public class BlueBarrel extends Barrel {
+
+	public BlueBarrel(Posicion posi, String root) {
+		super(posi,20,"barrilazul1");
+	}
+	
+	@Override
+	public void move(List<Platform> plataformas, List<Stair> escaleras) {
+		for(Platform plat: plataformas) {
+			for(Stair stair: escaleras) {
+				if(stair.intersecta(super.getHitBox())) {
+					moveDownStair(stair);
+				}
+				else if (plat.getTipo()==1 && plat.intersecta(super.getHitBox())) {
+					moveRigth();
+				}
+				else if(plat.getTipo()==2 && plat.intersecta(super.getHitBox())) {
+					moveLeft();
+				}
+				else {
+					moveDown();
+				}
+			}
+		}
+	}
+	
+	public void moveRigth() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]+2;
+		changePosition(temporal,valores[1]);	
+	}
+	
+	public void moveLeft() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]-2;
+		changePosition(temporal,valores[1]);
+	}
+	
+	public void moveDown() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[1]+2;
+		changePosition(valores[0], temporal);
+	}
+	
+	public void moveDownStair(Stair esc) {
+		int alturaBarrel= getPosicion().getY()+28;
+		if(alturaBarrel<= esc.getPosicionAbajoY()) {
+			int[] valores= posicion.getCordenadas();
+			int temporal= valores[1]+2;
+			changePosition(valores[0], temporal);
+		}		
+	}
+	
+	@Override
+	public void efecto(Player p) {
+		p.resteVida();
+	}
+	
+}

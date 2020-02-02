@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Point
+comment0.text=\r\n\ Creamos\ al\ punto.\r\n
+comment1.params=x\ y
+comment1.target=Point(int,\ int)
+comment1.text=\r\n\ Constructor\ de\ objetos\ de\ la\ clase\ Point.\r\n
+comment2.params=punto
+comment2.target=boolean\ equals(Point)
+comment2.text=\r\n\ Determina\ si\ dos\ puntos\ son\ iguales.\r\n\ @return\ valor,\ retorna\ si\ un\ punto\ es\ igual\ a\ otro\r\n
+comment3.params=
+comment3.target=int[]\ getCoordenadas()
+comment3.text=\r\n\ @return\ coordenadasPlano,\ retorna\ las\ coordenadas\ del\ punto\ \r\n
+numComments=4

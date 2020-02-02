@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=LluviaPegajosa
+comment0.text=\r\n\ Prpuesta\ por\ Ernesto\ Cmacho\ y\ Daniela\ Ruiz.\r\n\ Crea\ la\ lluvia\ pegajosa\ la\ cual\ se\ adiere\ a\ las\ lonas,\ para\ solo\ si\ toca\ una\ lona.\r\n
+comment1.params=x\ y
+comment1.target=LluviaPegajosa(int,\ int)
+comment2.params=trampas\ alto
+comment2.target=void\ startMove(java.util.ArrayList,\ int)
+comment2.text=\r\n\ Inicia\ el\ movimiento\ de\ la\ lluvia\ acida.\r\n\ \r\n
+numComments=3

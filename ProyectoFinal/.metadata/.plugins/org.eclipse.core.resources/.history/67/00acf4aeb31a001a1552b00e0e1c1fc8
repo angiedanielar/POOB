@@ -1,0 +1,14 @@
+package Aplicacion;
+
+public class Cereza extends Sorpresa {
+	public Cereza(Posicion posi, String root) {
+		super(posi,"cereza");
+	}
+	
+	public void efecto(Player p) {
+		if(isVisible()) {
+			p.sumeScore(10);
+			setVisible(false);
+		}
+	}
+}

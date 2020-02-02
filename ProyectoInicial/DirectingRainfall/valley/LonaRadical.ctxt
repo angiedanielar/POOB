@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=LonaRadical
+comment0.text=\r\n\ Crea\ las\ trampas\ radicales\ que\ se\ agujeran\ desaparecen.\r\n
+comment1.params=cord1\ cord2\ tamano
+comment1.target=LonaRadical(int[],\ int[],\ int)
+comment2.params=xposi
+comment2.target=void\ makePuncture(int)
+comment2.text=\r\n\ hace\ el\ hueco\ en\ la\ lona\r\n
+comment3.params=posicion
+comment3.target=void\ patchPuncture(int)
+comment3.text=\r\n\ hace\ el\ hueco\ en\ la\ lona\r\n
+comment4.params=cord1\ cord2
+comment4.target=void\ changePosition(int[],\ int[])
+numComments=5

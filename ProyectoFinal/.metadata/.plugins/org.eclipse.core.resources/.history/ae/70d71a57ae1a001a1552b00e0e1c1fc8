@@ -1,0 +1,389 @@
+package Aplicacion;
+
+import java.util.*;
+
+import Presentacion.Sprite;
+
+/**
+ * Crea el tablero aplicativo del Juego
+ */
+public class Board {
+	private boolean gameOver;
+	private boolean wonGame;
+	private int ancho;
+	private int alto;
+	private List<Barrel> barriles;
+	private List<Platform> plataformas;
+	private List<Stair> escaleras;
+	private List<Sorpresa> sorpresas;
+	private List<Player> players;
+	private Princesa princesa;
+	private Kong dKong;
+	private boolean enAire;
+	private boolean jumping;
+	private boolean escalando;
+	private Kong kong;
+	
+	private boolean isWinningState= false;
+	
+	private ProcesosApp procesoMueveBarriles;
+	
+	/**
+	 * Constructor del Board
+	 * @param alt, el alto del tablero de la app
+	 * @param anch, el ancho del tablero de la app
+	 */
+	public Board(int alt, int anch) {
+		gameOver= false;
+		wonGame= false;
+		alto= alt;
+		ancho= anch;
+		barriles= new ArrayList<Barrel>();
+		escaleras= new ArrayList<Stair>();
+		plataformas= new ArrayList<Platform>();
+		sorpresas= new ArrayList<Sorpresa>();
+		players= new ArrayList<Player>();
+		princesa= null;
+		dKong= null;
+		enAire = false;
+		jumping = false;
+		procesoMueveBarriles= new ProcesosApp(this,"mover_barriles");
+	}
+	
+	/**
+	 * Anade una plataforma al tablero
+	 * @param posiInicial, la posicion inicial de la plataforma
+	 * @param posiFinal, la posicion final de la plataforma
+	 * @param tipo,  el tipo de la plataforma (tipo 1 para mover a la derecha, tipo 2 para mover a la izquierda)
+	 */
+	public void addPlataforma(Posicion posiInicial, Posicion posiFinal, int tipo) {
+		plataformas.add(new Platform(posiInicial,posiFinal,tipo));
+	}
+	
+	/**
+	 * Anade una escalera normal al tablero
+	 * @param abajoInicial, la posicion inicial de la escalera
+	 * @param abajoFinal, la posicion final de la escalera
+	 * @param arribaInicial, la posicion inicial de la escalera
+	 * @param arribaFinal, la posicion final de la escalera
+	 */
+	public void addNormalStair(Posicion abajoInicial, Posicion abajoFinal, Posicion arribaInicial, Posicion arribaFinal) {
+		escaleras.add(new NormalStair(abajoInicial, abajoFinal, arribaInicial, arribaFinal));
+	}
+	
+	/**
+	 * Anade una escalera rota al tablero
+	 * @param abajoInicial, la posicion inicial de la escalera
+	 * @param abajoFinal, la posicion final de la escalera
+	 * @param arribaInicial, la posicion inicial de la escalera
+	 * @param arribaFinal, la posicion final de la escalera
+	 */
+	public void addBrokenStair(Posicion abajoInicial, Posicion abajoFinal, Posicion arribaInicial, Posicion arribaFinal) {
+		escaleras.add(new BrokenStair(abajoInicial, abajoFinal, arribaInicial, arribaFinal));
+	}
+	
+	/**
+	 * Anade un jugador al tablero
+	 * @param posi, la posicion del jugador
+	 * @param name, el nombre del jugador
+	 * @param estado, el estado del jugador (el sprite)
+	 */
+	public void addPlayer(Posicion posi, String name, String estado) {
+		players.add(new Player(posi, name, estado));
+	}
+
+	/**
+	 * Anade una princesa al tablero
+	 * @param posi, la posicion de la princesa
+	 * @param name, el nombre de la princesa (el sprite)
+	 */
+	public void addPrincesa(Posicion posi, String name) {
+		princesa= new Princesa(posi,name);
+	}
+
+	/**
+	 * Anade una manzana al tablero
+	 * @param posi, la posicion de la sorpresa: manzana 
+	 * @param name, el nombre del sprite
+	 */
+	public void addManzana(Posicion posi, String name) {
+		sorpresas.add(new Manzana(posi,name));
+	}
+	
+	/**
+	 * Anade un martillo al tablero
+	 * @param posi, la posicion de la sorpresa: martillo 
+	 * @param name, el nombre del sprite
+	 */
+	public void addMartillo(Posicion posi, String name) {
+		sorpresas.add(new Martillo(posi,name));
+	}
+	
+	/**
+	 * Anade una cereza al tablero
+	 * @param posi, la posicion de la sorpresa: cereza 
+	 * @param name, el nombre del sprite
+	 */
+	public void addCereza(Posicion posi, String name) {
+		sorpresas.add(new Cereza(posi,name));
+	}
+	
+	/**
+	 * Anade un corazon al tablero
+	 * @param posi, la posicion de la sorpresa: corazon 
+	 * @param name, el nombre del sprite
+	 */
+	public void addCorazon(Posicion posi, String name) {
+		sorpresas.add(new Corazon(posi,name));
+	}
+	
+	/**
+	 * Anade una cuerda al tablero
+	 * @param posi, la posicion de la sorpresa: cuerda 
+	 * @param name, el nombre del sprite
+	 */
+	public void addCuerda(Posicion posi, String name) {
+		sorpresas.add(new Cuerda(posi,name));
+	}
+	
+	/**
+	 * Anade un hongo al tablero
+	 * @param posi, la posicion de la sorpresa: hongo 
+	 * @param name, el nombre del sprite
+	 */
+	public void addHongo(Posicion posi, String name) {
+		sorpresas.add(new Hongo(posi,name));
+	}
+	
+	/**
+	 * Anade un simio al tablero
+	 * @param posi, la posicion del KONG de la app
+	 * @param name, el nombre del sprite
+	 */
+	public void addKong(Posicion posi, String sprite) {
+		dKong= new Kong(posi, sprite);
+	}
+	
+	/**
+	 * Obtiene la lista de los jugadores actuales
+	 * @return players, Devuelve una lista de los jugadores
+	 */
+	public List<Player> getPlayers(){
+		return players;
+	}
+	
+	/**
+	 * Obtiene  la lista de las escaleras actuales
+	 * @return escaleras, Devuelve una lista de las escaleras
+	 */
+	public List<Stair> getStairs(){
+		return escaleras;
+	}
+
+	/**
+	 * Obtiene las sorpesas
+	 * @return players, Devuelve una lista de las sorpesas
+	 */
+	public List<Sorpresa> getSorpresas(){
+		return sorpresas;
+	}
+	
+	/**
+	 * Obtiene las plataformas
+	 * @return plataformas, Devuelve una lista de las plataformas
+	 */
+	public List<Platform> getPlataformas(){
+		return plataformas;
+	}
+	
+	/**
+	 * Mueve al jugador a la derecha
+	 * @param n, el jugador a mover
+	 */
+	public void JugadorMoveRight(int n){
+		int posiPlat= enDondeEstaPlayer(n);
+		players.get(n).moveRigth();
+	}
+	
+	/**
+	 * Mueve al jugador a la izquierda
+	 * @param n, el jugador a mover
+	 */
+	public void JugadorMoveLeft(int n){
+		int posiPlat= enDondeEstaPlayer(n);
+		players.get(n).moveLeft();
+  	}
+	
+	/**
+	 * NO SE LOGRÓ REALIZAR EL SALTO
+	 * Mueve al jugador hacia arriba
+	 * @param n, el jugador a mover
+	 */
+	public void JugadorMoveUp(int n){
+		System.out.println("   algo   "+jumping+" "+players.get(n).validarSalto()+" "+escalando+" "+enAire);
+  		if(jumping && players.get(n).validarSalto() && !escalando && !enAire) {
+  			players.get(n).moveUp();  			
+  		}
+  	}
+	
+	/**
+	 * Mueve al jugador hacia abajo
+	 * @param n, el jugador a mover
+	 */
+	public void JugadorMoveDown(int n){
+		for(int i=0;i<escaleras.size();i++) {
+			int alturaPlayer= players.get(n).getPosicion().getY()+Player.altoDefault;
+  			if(escaleras.get(i).intersecta(players.get(n).getHitBox()) && !escaleras.get(i).isBroken() &&
+  			   (alturaPlayer<=escaleras.get(i).getPosicionAbajoY())){
+  				enAire=true;
+  				players.get(n).moveDown();
+  			}
+  		}
+  	}
+	
+	/**
+	 * mira en que platafroma esta el jugador
+	 * @param n, el jugador a consultar
+	 */
+	private int enDondeEstaPlayer(int n) {
+		int resp= 0;
+		for(Platform plat:plataformas) {
+			if(players.get(n).getPosicion().getX() >= plat.getCoordenadas().get(0).getX() && 
+			   players.get(n).getPosicion().getX() >= plat.getCoordenadas().get(1).getX() &&
+			   plat.intersecta(players.get(n).getHitBox())) {
+				resp= plataformas.indexOf(plat);
+				break;
+			}
+		}
+		return resp;
+	}
+	
+	/**
+	 * Mueve al jugador para que suba la escalera
+	 * @param n, el jugador a mover
+	 */
+	public void JugadorMoveEscalar(int n){ 
+  		for(int i=0;i<escaleras.size();i++) {
+  			if(escaleras.get(i).intersecta(players.get(n).getHitBox()) && !escaleras.get(i).isBroken() &&
+  	  		   (players.get(n).getPosicion().getY()>(escaleras.get(i).getPosicionArribaY())-30)) {
+  				escalando=true;
+  				players.get(n).setSubir();
+  				jumping=false;
+  				enAire=false;
+  				players.get(n).moveUp();
+  			}
+  			else{
+  				escalando=false;
+  			}
+  		}
+	}
+	
+	public void moveBarrels() {
+		for(Barrel barrel: barriles) {
+			barrel.move(plataformas,escaleras);
+		}
+	}
+	
+	public void intersectaBarriles() {
+		for(Barrel barril:barriles) {
+			if(barril.intersecta(players.get(0).getHitBox())) {
+				barril.efecto(players.get(0));
+			}
+		}
+	}
+
+	public void intersectaSorpresa() {
+		for(Sorpresa sorpresa:sorpresas) {
+			if(sorpresa.intersecta(players.get(0).getHitBox())) {
+				sorpresa.efecto(players.get(0));
+			}
+		}
+	}
+
+	public void intersectaPrincesa() {
+		if (princesa.intersecta(players.get(0).getHitBox())) {
+			isWinningState= true;
+		}
+	}
+	
+	public void printtt(){
+		System.out.println(players.get(0).getLifes());
+		System.out.println(players.get(0).getScore());
+	}
+		
+	public int getScore() {
+		return players.get(0).getScore();
+	}
+	
+	public int getVida() {	
+		return players.get(0).getLifes();
+	}
+
+	public void addBarrel(String barrelType) {
+		if(barrelType.equals("rojo")) {
+			barriles.add(new RedBarrel(Barrel.posicionInicial,"barrilrojo1"));
+		}
+		else if(barrelType.equals("azul")) {
+			barriles.add(new BlueBarrel(Barrel.posicionInicial,"barrilazul1"));
+		}
+		else if(barrelType.equals("amarillo")) {
+			barriles.add(new YellowBarrel(Barrel.posicionInicial,"barrilamarillo1"));
+		}
+		else if(barrelType.equals("verde")) {
+			barriles.add(new GreenBarrel(Barrel.posicionInicial,"barrilverde1"));
+		}
+	}
+	
+	/**
+	 * Prepara todo el Nivel F
+	 */
+	public void prepareNivelF() {
+		/*Plataformas*/
+		addPlataforma(new Posicion(0,629), new Posicion(617,629),1);
+		addPlataforma(new Posicion(0,539), new Posicion(561,539),2);
+		addPlataforma(new Posicion(47,447), new Posicion(617,447),1);
+		addPlataforma(new Posicion(0,350), new Posicion(572,350),2);
+		addPlataforma(new Posicion(43,250), new Posicion(617,250),1);
+		addPlataforma(new Posicion(0,156), new Posicion(569,156),2);
+		addPlataforma(new Posicion(246,78), new Posicion(379,78),1);
+		
+		/*Escaleras*/
+		addBrokenStair(new Posicion(123,629), new Posicion(145,629), new Posicion(123,530), new Posicion(145,530));
+		addNormalStair(new Posicion(396,629), new Posicion(418,629), new Posicion(396,530), new Posicion(418,530));
+		addNormalStair(new Posicion(452,539), new Posicion(473,539), new Posicion(452,440), new Posicion(473,440));	
+		addBrokenStair(new Posicion(269,539), new Posicion(291,539), new Posicion(269,440), new Posicion(291,440));
+		addNormalStair(new Posicion(100,539), new Posicion(122,539), new Posicion(100,440), new Posicion(122,440));
+		addBrokenStair(new Posicion(482,447), new Posicion(505,447), new Posicion(482,340), new Posicion(505,340));
+		addNormalStair(new Posicion(312,447), new Posicion(334,447), new Posicion(312,340), new Posicion(334,340));
+		addBrokenStair(new Posicion(137,447), new Posicion(160,447), new Posicion(137,340), new Posicion(160,340));
+		addBrokenStair(new Posicion(514,350), new Posicion(536,350), new Posicion(514,240), new Posicion(536,240));
+		addNormalStair(new Posicion(369,350), new Posicion(392,350), new Posicion(369,240), new Posicion(392,240));
+		addNormalStair(new Posicion(198,350), new Posicion(220,350), new Posicion(198,240), new Posicion(220,240));
+		addBrokenStair(new Posicion(86,350), new Posicion(110,350), new Posicion(86,240), new Posicion(110,240));
+		addNormalStair(new Posicion(445,250), new Posicion(468,250), new Posicion(445,150), new Posicion(468,150));
+		addBrokenStair(new Posicion(245,250), new Posicion(266,250), new Posicion(245,150), new Posicion(266,150));
+		addNormalStair(new Posicion(356,156), new Posicion(378,156), new Posicion(356,70), new Posicion(378,70));
+	}
+
+	/**
+	 * Retorna el objeto tipo Kong
+	 * @return kong, Devuelve el mono
+	 */
+	public Kong getDonkey() {
+		return kong;
+	}
+
+
+	public List<Barrel> getBarrels(){
+		return barriles;
+	}
+	
+	public void startHilo() {
+		procesoMueveBarriles.start();
+		
+	}
+	
+	public boolean getWinningState(){
+		return isWinningState;
+	}
+}

@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=LluviaNormal
+comment0.text=\r\n\ Crea\ la\ lluvia\ normal.\r\n
+comment1.params=x\ y
+comment1.target=LluviaNormal(int,\ int)
+numComments=2

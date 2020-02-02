@@ -1,0 +1,33 @@
+package Presentacion;
+
+public class ProcesoGui extends Thread {
+	private Tablero tablero;
+	private boolean estado;
+	private String name;
+	public ProcesoGui(Tablero tab, String name) {
+		tablero= tab;
+		estado= true;
+		this.name= name;
+	}
+	
+	public void run() {
+		try {
+			if(name.equals("actualizador")) {
+				while(estado) {
+					tablero.actualice();
+					tablero.repaint();
+				}
+			}
+			else if(name.equals("agregador_barriles")) {
+				while(estado) {
+					tablero.addBarrel();
+				}
+				sleep(50);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+

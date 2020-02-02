@@ -1,0 +1,21 @@
+CUANDO SOLO ESTA CREADO 
+
+git init
+
+git push -u origin master
+
+git remote add origin https://github.com/angiedr/Proyecto-Final-Poob.git
+
+
+
+
+
+EN EL REPOSITORIO QUE YA EXISTEN COSAS
+
+git init
+
+git add .
+
+git commit -m "las imagenes iniciales para Ernesto"
+
+git push origin master

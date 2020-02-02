@@ -1,0 +1,17 @@
+package Pruebas;
+
+public class DKoongTestSorpresas {
+	
+	//Hongo debe invertir controles
+	
+	//Manzana debe dar 5 puntos 
+		
+	//cereza deeb dar 10 puntos
+
+	//Coazon debe dar una vida
+		
+	//Cuerda debe dejar subir de una plataforma a otra
+		
+	//Martillo permite destruir barriles cierto tiempo
+
+}

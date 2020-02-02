@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=LonaInmutable
+comment0.text=\r\n\ Crea\ las\ trampas\ inmutables\ las\ cuales\ no\ se\ pueden\ parchar.\r\n
+comment1.params=cord1\ cord2\ tamano
+comment1.target=LonaInmutable(int[],\ int[],\ int)
+comment2.params=posicion
+comment2.target=void\ patchPuncture(int)
+comment2.text=\r\n\ hace\ el\ hueco\ en\ la\ lona\r\n
+comment3.params=cord1\ cord2
+comment3.target=void\ changePosition(int[],\ int[])
+numComments=4

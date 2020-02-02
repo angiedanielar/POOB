@@ -1,0 +1,84 @@
+package Aplicacion;
+
+import java.util.List;
+
+/**
+ * Crea el barril azul del Juego 
+ */
+public class BlueBarrel extends Barrel {
+
+	/**
+	 * Constructor del Blue Barrel
+	 * @param posi, la posicion del barril azul
+	 * @param points, los puntos del barril azul
+	 * @param root, el sprite del barril azul
+	 */
+	public BlueBarrel(Posicion posi, String root) {
+		super(posi,20,"barrilazul1");
+	}
+	
+	/**
+	 * Mueve el barril azul, le permite bajar todas las escaleras y rodar segun el tipo 
+	 * de plataforma sobre la cual este, y caiga cuando no haya por donde moverse.
+	 * @param plataformas, la lista actual de las plataformas del tablero
+	 * @param escaleras, la lista actual de las escaleras del tablero 
+	 */
+	@Override
+	public void move(List<Platform> plataformas, List<Stair> escaleras) {
+		for(Platform plat: plataformas) {
+			for(Stair stair: escaleras) {
+				if(stair.intersecta(super.getHitBox())) {
+					moveDownStair(stair);
+				}
+				else if (plat.getTipo()==1 && plat.intersecta(super.getHitBox())) {
+					moveRigth();
+				}
+				else if(plat.getTipo()==2 && plat.intersecta(super.getHitBox())) {
+					moveLeft();
+				}
+				else {
+					moveDown();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Mueve el barril azul a la derecha 
+	 */
+	public void moveRigth() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]+2;
+		changePosition(temporal,valores[1]);	
+	}
+	
+	/**
+	 * Mueve el barril azul a la izquierda 
+	 */
+	public void moveLeft() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]-2;
+		changePosition(temporal,valores[1]);
+	}
+	
+	public void moveDown() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[1]+2;
+		changePosition(valores[0], temporal);
+	}
+	
+	public void moveDownStair(Stair esc) {
+		int alturaBarrel= getPosicion().getY()+28;
+		if(alturaBarrel<= esc.getPosicionAbajoY()) {
+			int[] valores= posicion.getCordenadas();
+			int temporal= valores[1]+2;
+			changePosition(valores[0], temporal);
+		}		
+	}
+	
+	@Override
+	public void efecto(Player p) {
+		p.resteVida();
+	}
+	
+}

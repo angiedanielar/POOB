@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=LluviaStraight
+comment0.text=\r\n\ Crea\ la\ lluvia\ straight\ la\ cual\ cambia\ su\ forma\ para\ mantenerse\ recta\ y\ si\ no\ est\u00E1\ regando\ un\ vi\u00F1edo\ para.\r\n
+comment1.params=x\ y
+comment1.target=LluviaStraight(int,\ int)
+numComments=2

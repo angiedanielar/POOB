@@ -1,0 +1,37 @@
+package Aplicacion;
+
+import java.awt.Rectangle;
+
+/**
+ * Crea la princesa del juego
+ */
+public class Princesa {
+	private Posicion posicion;
+	private String color;
+	private Rectangle hitBox;
+
+	/**
+	* Constructor de la princesa
+	*/
+	public Princesa(Posicion posi, String color) {
+		posicion= posi;
+		this.color= color;
+		hitBox= new Rectangle(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+	}
+		
+	/**
+	* retrona la posicion de la princesa
+	* @return posicion, devuelve la posicion actual de la princesa
+	*/
+	public Posicion getPosicion() {
+		return posicion;
+	}
+
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+
+	public boolean intersecta(Rectangle r) {
+		return hitBox.intersects(r);
+	}
+}

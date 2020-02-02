@@ -1,0 +1,50 @@
+package Aplicacion;
+
+import java.util.List;
+
+public class YellowBarrel extends Barrel {
+
+	public YellowBarrel(Posicion posi, String root) {
+		super(posi,10,"barrilamarillo1");
+	}
+	
+	@Override
+	public void move(List<Platform> plataformas, List<Stair> escaleras) {
+		while (movimiento){
+			for(Platform plat: plataformas) {
+				if (plat.getTipo()==1 && plat.intersecta(super.getHitBox())) {
+					moveRigth();
+				}
+				else if(plat.getTipo()==2 && plat.intersecta(super.getHitBox())) {
+					moveLeft();
+				}
+				else {
+					moveDown();
+				}
+			}
+		}
+	}
+	
+	public void moveRigth() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]+2;
+		changePosition(temporal,valores[1]);	
+	}
+	
+	public void moveLeft() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]-2;
+		changePosition(temporal,valores[1]);
+	}
+	
+	public void moveDown() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[1]+2;
+		changePosition(valores[0], temporal);
+	}
+	
+	@Override
+	public void efecto(Player p) {
+		p.resteVida();
+	}
+}

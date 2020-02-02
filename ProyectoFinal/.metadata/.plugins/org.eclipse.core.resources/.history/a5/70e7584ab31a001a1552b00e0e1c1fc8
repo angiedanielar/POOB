@@ -1,0 +1,14 @@
+package Aplicacion;
+
+public class Hongo extends Sorpresa {
+	public Hongo(Posicion posi, String root) {
+		super(posi,"hongo");
+	}
+	
+	public void efecto(Player p) {
+		if(isVisible()) {
+			p.setInvertido();
+			setVisible(false);
+		}		
+	}
+}

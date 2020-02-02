@@ -1,0 +1,94 @@
+package Aplicacion;
+
+import java.io.Serializable;
+
+/**
+ * Crea el mono del Juego 
+ */
+public class Kong implements Serializable {
+	private Posicion posicion;
+	private int estado;
+	private String sprite;
+	private int x;
+	private int y;
+	private String root;
+	
+	
+	/**
+	 * Constructor del Kong
+	 * @param posi, la posicion del mono
+	 * @param root, el sprite del mono
+	 */
+	public Kong(Posicion posi, String root) {
+		posicion= posi;
+		this.root = root;
+		this.x = posi.getX();
+		this.y = posi.getY();
+		estado= 0;
+	}
+	
+	/**
+	 * Obiene la poscion del mono
+	 * @return posicion, devuelve la posicion del Kong
+	 */
+	public Posicion getPosicion() {
+		return posicion;
+	}
+	
+	/**
+	 * Cambia el estado del Kong
+	 * @param newEstado, el estado a cambiar del Kong
+	 */
+	public void changeEstado(int newEstado) {
+		this.estado= newEstado;
+	}
+	
+	/**
+	 * Obtiene el estado actual de Kong
+	 * @return estado, devuelve el estado del Kong
+	 */
+	public int getEstado() {
+		return estado;
+	}
+	
+	/**
+	 * Obtiene la coordenada en X del kong
+	 * @return x, devuelve la coordenada del kong en X
+	 */
+	public int getX() {
+		return x;
+	}
+	
+	/**
+	 * Obtiene la coordenada en Y del kong
+	 * @return y, devuelve la coordenada del kong en Y
+	 */
+	public int getY() {
+		return y;
+	}
+	
+	/**
+	 * Obtiene el sprite del Kong
+	 * @return root, devuelve el sprite
+	 */
+	public String getRoot() {
+		return root;
+	}
+
+	public void setRoot(String root) {
+		this.root = root;
+	}
+	
+	public void move() {
+		if(root.equals("mono1")) {
+			setRoot("mono2");
+		}
+		else if(root.equals("mono2")){
+			setRoot("mono3");
+		}
+		else if(root.equals("mono3")){
+			setRoot("mono1");
+		}
+	}
+	
+}

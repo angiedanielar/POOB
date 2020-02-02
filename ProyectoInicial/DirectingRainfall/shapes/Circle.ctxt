@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=Circle
+comment0.text=\r\n\ A\ circle\ that\ can\ be\ manipulated\ and\ that\ draws\ itself\ on\ a\ canvas.\r\n\ \r\n\ @author\ \ Michael\ Kolling\ and\ David\ J.\ Barnes\r\n\ @version\ 1.0.\ \ (15\ July\ 2000)\ \r\n
+comment1.params=
+comment1.target=Circle()
+comment1.text=\r\n\ Create\ a\ new\ circle\ at\ default\ position\ with\ default\ color.\r\n
+comment2.params=newDiameter
+comment2.target=void\ changeSize(int)
+comment2.text=\r\n\ Change\ the\ size.\r\n\ @param\ newDiameter\ the\ new\ size\ (in\ pixels).\ Size\ must\ be\ >\=0.\r\n
+comment3.params=
+comment3.target=void\ draw()
+comment3.text=\r\n\ Draw\ the\ circle\ with\ current\ specifications\ on\ screen.\r\n
+comment4.params=
+comment4.target=int\ getDiameter()
+comment5.params=newDiameter
+comment5.target=void\ setDiameter(int)
+comment6.params=times
+comment6.target=void\ growUp(int)
+comment6.text=\r\n\ growUp\r\n\ @param\ int\ times\ el\ numero\ de\ veces\ que\ aumenta\ su\ tama\u00F1o\ por\ 1\r\n
+comment7.params=
+comment7.target=void\ area()
+comment7.text=\r\n\ area\r\n\ escribe\ el\ valor\ del\ area\ del\ circulo\r\n
+comment8.params=
+comment8.target=void\ jump()
+comment8.text=\r\n\ jump\r\n\ hace\ que\ el\ circulo\ salte\ a\ la\ drecha\r\n
+numComments=9

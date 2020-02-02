@@ -1,0 +1,11 @@
+package Aplicacion;
+
+public class Cuerda extends Sorpresa {
+	public Cuerda(Posicion posi, String root) {
+		super(posi,"cuerda");
+	}
+	
+	public void efecto(Player p) {
+		
+	}
+}

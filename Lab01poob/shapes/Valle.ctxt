@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Valle
+comment0.text=\r\n\ Creamos\ el\ valle\r\n\r\n
+comment1.params=alto\ ancho
+comment1.target=Valle(int,\ int)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Valle\r\n
+comment2.params=
+comment2.target=void\ hacerValle()
+comment2.text=\r\n\ crea\ las\ caracteriasticas\ del\ valle\r\n\r\n\ @param\ \ y\ \ a\ sample\ parameter\ for\ a\ method\r\n\ @return\ \ \ \ the\ sum\ of\ x\ and\ y\r\n
+comment3.params=
+comment3.target=void\ makeVisible()
+comment4.params=
+comment4.target=void\ makeInvisible()
+comment4.text=\r\n\ hace\ invisible\ la\ celda\r\n
+numComments=5

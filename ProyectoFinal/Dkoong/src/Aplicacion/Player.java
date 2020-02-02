@@ -1,0 +1,333 @@
+package Aplicacion;
+
+import java.awt.Rectangle;
+import java.util.*;
+
+/**
+ * Crea al Jugador del Juego
+ */
+public class Player {
+	private static int lifes;
+	private static int points;
+	private String name;
+	private String estado;
+	private Posicion posicion;
+	private Rectangle hitBox;
+
+	protected boolean visible;
+	
+	private boolean invertido= false;
+	public boolean saltando= false;
+	public boolean falling= true;
+	public boolean movimiento= true;
+
+	
+	public static int anchoDefault= 32;
+	public static int altoDefault= 42;
+	public static int anchoMartillo= 65;
+	public static int altoMartillo= 70;	
+	
+	/**
+	 * Constructor del Player
+	 * @param posi, la posicion del jugador
+	 * @param color, el nombre del jugador
+	 * @param estado, el estado del jugador
+	 */
+	public Player(Posicion posi, String name, String estado) {
+		lifes= 3;
+		points= 0;
+		this.estado= estado;
+		this.posicion= posi;
+		this.name=name;
+		visible = true;
+		hitBox= new Rectangle(posicion.getCordenadas()[0], posicion.getCordenadas()[1],anchoDefault,altoDefault);
+	}
+	
+	/**
+	 * Devuelte el sprite actual del jugador
+	 * @return root, el sprite actual
+	 */
+	public String getRoot() {
+		return name + estado;
+	}
+	
+	/**
+	 * Actualiza el sprite del jugador
+	 * @return root, el sprite actual 
+	 */
+	public void setName(String r) {
+		name = r;
+	}
+	
+	/**
+	 * Actualiza el estado del jugador
+	 * @return estado, el estado actual 
+	 */
+	public void setEstado(String r) {
+		estado= r;
+	}
+	
+	/**
+	 * Mueve el jugador hacia la izquierda
+	 */
+	public void moveLeft() {
+		if(!invertido) {
+			int[] valores= posicion.getCordenadas();
+			int temporal= valores[0]-2;
+			changePosition(temporal,valores[1]);
+			hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+			if(movimiento) {
+				setEstado("2");
+				movimiento=false;
+			}else {
+				setEstado("3");
+				movimiento=true;
+			}
+		}
+		else {
+			moveRigthInvertido();
+		}
+	}
+	
+	/**
+	 * Mueve el jugador hacia la derecha
+	 */
+	public void moveRigth() {
+		if(!invertido) {
+			int[] valores= posicion.getCordenadas();
+			int temporal= valores[0]+2;
+			changePosition(temporal,valores[1]);
+			hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+		    if(movimiento) {
+				setEstado("12");
+				movimiento=false;
+			}
+		    else {
+				setEstado("13");
+				movimiento=true;
+			}
+		}
+		else {
+			moveLeftInvertido();
+		}
+	 }
+	
+	/**
+	 * Mueve el jugador hacia arriba 
+	 */
+	//falta saltar :(
+	public void moveUp() {
+		if(!invertido) {
+			int[] valores= posicion.getCordenadas();
+			int temporal= valores[1]-2;
+			posicion.changeCoordinadas(valores[0], temporal);
+			hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+			if(getRoot().equals(name+"11") ||getRoot().equals(name+"12")) {
+				setEstado("13");
+			}
+			else if (getRoot().equals(name+"1") || getRoot().equals(name+"2")) {
+				setEstado("13");
+			}
+		}
+		else {
+			moveDownInvertido();
+		}
+	}
+	
+	/**
+	 * Mueve el jugador hacia abajo
+	 */
+	public void moveDown() {
+		if(!invertido) {
+			int[] valores= posicion.getCordenadas();
+			int temporal= valores[1]+2;
+			posicion.changeCoordinadas(valores[0], temporal);
+			hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+			if(getRoot().equals(name+"11") ||getRoot().equals(name+"12")) {
+				setEstado("6");
+			}
+		}
+		else {
+			mobeUpInvertido();
+		}
+	}
+	
+	/**
+	 * Mueve el jugador invertido 
+	 * Mueve izquierda pero en realidqad mueve derecha
+	 */
+	public void moveLeftInvertido() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]-2;
+		changePosition(temporal,valores[1]);
+		hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+		if(movimiento) {
+			setEstado("2");
+			movimiento=false;
+		}else {
+			setEstado("3");
+			movimiento=true;
+		}
+	}
+	
+	/**
+	 * Mueve el jugador invertido 
+	 * Mueve derecha pero en realidqad mueve izquierda
+	 */
+	public void moveRigthInvertido() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[0]+2;
+		changePosition(temporal,valores[1]);
+		hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+	    if(movimiento) {
+			setEstado("12");
+			movimiento=false;
+		}
+	    else {
+			setEstado("13");
+			movimiento=true;
+		}
+	}
+	
+	/**
+	 * Mueve el jugador invertido 
+	 * Mueve hacia abajo pero en realidqad mueve hacia arriba
+	 */
+	public void moveDownInvertido() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[1]+2;
+		posicion.changeCoordinadas(valores[0], temporal);
+		hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+		if(getRoot().equals(name+"11") ||getRoot().equals(name+"12")) {
+			setEstado("6");		
+		}
+	}
+	
+	/**
+	 * Mueve el jugador invertido 
+	 * Mueve hacia arriba pero en realidqad mueve hacia abajo
+	 */
+	public void mobeUpInvertido() {
+		int[] valores= posicion.getCordenadas();
+		int temporal= valores[1]-2;
+		posicion.changeCoordinadas(valores[0], temporal);
+		hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+		if(getRoot().equals(name+"11") ||getRoot().equals(name+"12")) {
+			setEstado("13");
+		}
+		else if (getRoot().equals(name+"1") || getRoot().equals(name+"2")) {
+			setEstado("13");
+		}
+	}
+	/**
+	 * Mueve los sprites del jugador cuando sube la escalera si es posible
+	 */
+	public void setSubir() {
+		if(!name.equals("mariorojo14")) {
+			setEstado("4");
+		}
+		else if(name.equals("mariorojo14")){
+			setEstado("14");
+		}
+	}
+	
+	/**
+	 * Mueve los sprites del jugador normalmente
+	 */
+	public void moveNormal() {
+		if(name.equals("mario rojo 12")) {
+			setEstado("11");
+		}
+		else if(name.equals("mariorojo2")){
+			setEstado("2");
+		}	
+	}
+	
+	/**
+	 * Suma vidas al jugador
+	 */
+	public void sumeVida() {
+		this.lifes+=1;		
+	}
+	
+	/**
+	 * Resta vidas al jugador
+	 */
+	public void resteVida() {
+		this.lifes-=1;
+	}
+	
+	/**
+	 * Suma los puntos del jugador
+	 *  @param i, la cantidad de puntos a sumar
+	 */
+	public void sumeScore(int i) {
+		this.points+=i;	
+	}
+	
+	/**
+	 * Obtiene el score del jugador 
+	 * @return points, los puntos a devolver
+	 */
+	public int getScore() {
+		return points;
+	} 
+	
+	/**
+	 * Obtiene las vidas del jugador 
+	 * @return lifes, las vidas a devolver
+	 */
+	public int getLifes() {
+		return lifes;
+	} 
+	
+	/**
+	 * Hace visible o invisible al jugador 
+	 */
+	public void setVisible(boolean v){
+		visible = v;
+	}
+	
+	/**
+	 * Dice si el jugador actual esta visible o no
+	 * @return visible, devuelve si el jugador es visible
+	 */
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	/**
+	 * Cambia la posicion del jugador 
+	 */
+	public void changePosition(int a, int b) {
+		this.posicion.changeCoordinadas(a, b);
+	}
+	
+	/**
+	 * Retorna la Posicion del Player
+	 * @return posicion
+	 */
+	public Posicion getPosicion() {
+		return posicion;
+	}
+	
+	/**
+	 * Retorna el rectangulo del jugador
+	 * @return hitBox, el rectangulo a devolver
+	 */
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
+	/**
+	 * Vuelve el jugador invertido o no 
+	 */
+	public void setInvertido() {
+		if(invertido) {
+			invertido= false;
+		}
+		else {
+			invertido= true;
+		}
+	}
+}

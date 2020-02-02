@@ -1,0 +1,42 @@
+package Presentacion;
+
+/**
+ * Controla el proceso de la interfaz
+ */
+public class ProcesoGui extends Thread {
+	private Tablero tablero;
+	private boolean estado;
+	private String name;
+	
+	/**
+	* Constructor del proceso de la interfaz
+	* @param board, el tablero del juego presentacion
+	* @param name, el nombre del proceso a relizar
+	*/
+	public ProcesoGui(Tablero tab, String name) {
+		tablero= tab;
+		estado= true;
+		this.name= name;
+	}
+	
+	public void run() {
+		try {
+			if(name.equals("actualizador")) {
+				while(estado) {
+					tablero.actualice();
+					tablero.repaint();
+				}
+			}
+			else if(name.equals("agregador_barriles")) {
+				while(estado) {
+					tablero.addBarrel();
+				}
+				sleep(50);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+

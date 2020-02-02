@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=ValleyContest
+comment0.text=\r\n\ Clase\ para\ simular\ el\ problema\ de\ la\ marat\u00F3n\r\n
+comment1.params=
+comment1.target=ValleyContest()
+comment2.params=vineyard\ tarps
+comment2.target=int\ solve(int[],\ int[][])
+comment3.params=vineyard\ tarps\ slow
+comment3.target=boolean\ simulate(int[],\ int[][],\ boolean)
+numComments=4

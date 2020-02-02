@@ -1,0 +1,51 @@
+package aplicacion;
+
+import java.awt.Color;
+import java.util.Random;
+
+/**
+ * @author ECI 2014
+ * 
+ */
+
+/**
+ * Interfaz EnEscena dada por la ECI
+ * @author ECI
+ */
+public interface EnEscena {
+    String[] FORMAS = new String[]{"Persona", "Circulo", "Cuadrado"};
+    Random r = new Random(1);
+    
+    int getPosicionX();
+    int getPosicionY();
+    Color getColor();
+
+    void actue();
+    void corte();
+    void reinicien();
+    
+    /**
+     * Es una persona
+     */
+    default String forma() {
+       return FORMAS[0];
+    }
+    
+    /**
+     * El mensaje es la representación cadena del objeto
+     */
+    default String mensaje() {
+       return toString();
+    }
+    
+    /**
+     * Decide aleatoriamente la acción a tomar
+     */
+    default void decida() {
+        if (r.nextBoolean()){
+            actue();
+        }else{
+            corte();
+        }
+    }    
+}

@@ -1,0 +1,71 @@
+package Aplicacion;
+
+import java.awt.Rectangle;
+import java.util.*;
+
+/**
+ * Crea el barril del Juego 
+ */
+public abstract class Barrel {
+	protected Posicion posicion;
+	protected int estado;
+	protected Rectangle hitBox;
+	protected int points;
+	public static Posicion posicionInicial= new Posicion(130,150);
+	protected String root;
+	protected boolean movimiento;
+	protected boolean puedeBajar;
+	
+	
+	/**
+	 * Constructor del Barrel
+	 */
+	public Barrel(Posicion posi,int points, String root) {
+		posicion= posi;
+		estado= 0;
+		this.points= points;
+		hitBox= new Rectangle(posi.getCordenadas()[0], posi.getCordenadas()[1],28,28);
+		movimiento= false;
+		puedeBajar= true;		
+	}
+	
+	/**
+	 * @return posicion, Devuelve la posicion del barril
+	 */
+	public Posicion getPosicion() {
+		return posicion;
+	}
+	
+	/**
+	 * Devuelte el sprite actual del barril
+	 * @return root, el sprite actual
+	 */
+	public String getRoot() {
+		return root;
+	}
+	
+	/**
+	 * Actualiza el sprite del barril
+	 * @return root, el sprite
+	 */
+	public void setRoot(String r) {
+		root = r;
+	}
+	
+	public void changePosition(int x, int y) {
+		posicion.changeCoordinadas(x, y);
+		hitBox.setLocation(posicion.getCordenadas()[0], posicion.getCordenadas()[1]);
+	}
+	
+	public Rectangle getHitBox() {
+		return hitBox;
+	}
+	
+	public boolean intersecta(Rectangle r) {
+		return hitBox.intersects(r);
+	}
+	
+	public abstract void efecto(Player p);
+	
+	public abstract void move(List<Platform> plataformas, List<Stair> escaleras);
+}

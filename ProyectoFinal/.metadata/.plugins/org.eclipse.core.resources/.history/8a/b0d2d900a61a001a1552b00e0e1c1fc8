@@ -1,0 +1,30 @@
+package Pruebas;
+
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
+import Aplicacion.*;
+
+public class DKoongTestJugadores {
+	
+	//Jugador debe bajar escalera normal
+	
+	//Jugador no debe bajar escalera rota
+	
+	//Jugador no debe bajar si no esta en una escalera
+
+	//Jugador no debe subir si no esta en una escalera
+	
+	//Jugador no debe salir de la pantalla
+	
+	//Jugador no debe saltar si ya esta saltando
+	
+	//Jugador no debe saltar si esta escalando
+	
+}

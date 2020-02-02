@@ -1,0 +1,23 @@
+package Aplicacion;
+
+public class ProcesosApp extends Thread {
+	
+	private  Board board;
+	private String name;
+	
+	public ProcesosApp(Board board, String name) {
+		this.board= board;
+		this.name= name;
+	}
+	
+	public void run() {
+		try {
+			if(name.equals("mover_barriles")) {
+				sleep(60);
+				board.moveBarrels();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

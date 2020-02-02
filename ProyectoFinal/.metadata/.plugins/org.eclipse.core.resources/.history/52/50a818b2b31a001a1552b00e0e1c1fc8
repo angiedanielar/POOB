@@ -1,0 +1,20 @@
+package Aplicacion;
+
+public class Manzana extends Sorpresa {
+	
+	/**
+	 * Constructor de la sorpresa Manzana
+	 * @param posi, la posicion de la manzana
+	 * @param name, el spirte de la manzana 
+	 */
+	public Manzana(Posicion posi, String root) {
+		super(posi,"manzana");
+	}
+	
+	public void efecto(Player p) {
+		if(isVisible()) {
+			p.sumeScore(5);
+			setVisible(false);
+		}
+	}
+}

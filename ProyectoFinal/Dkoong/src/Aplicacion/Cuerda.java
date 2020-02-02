@@ -1,0 +1,25 @@
+package Aplicacion;
+
+/**
+ * Crea la sorpresa Cuerda del juego
+ */
+public class Cuerda extends Sorpresa {
+	
+	/**
+	 * Constructor de la sorpresa Cuerda
+	 * @param posi, la posicion de la cuerda
+	 * @param name, el spirte de la cuerda 
+	 */
+	public Cuerda(Posicion posi, String root) {
+		super(posi,"cuerda");
+	}
+	
+	/**
+	 * El poder que tiene la sorpresa: Permite subir de una plataforma a otra (1 sola vez)
+	 * @player p, el jugador al cual se le aplica el efecto
+	 * NO SE LOGRO REALIZAR
+	 */
+	public void efecto(Player p) {
+		
+	}
+}
