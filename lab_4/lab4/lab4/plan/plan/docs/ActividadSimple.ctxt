@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=ActividadSimple
+comment1.params=id\ creditos
+comment1.target=ActividadSimple(java.lang.String,\ java.lang.Integer)
+comment2.params=id\ descripcion\ creditos
+comment2.target=ActividadSimple(java.lang.String,\ java.lang.String,\ java.lang.Integer)
+comment3.params=
+comment3.target=int\ creditos()
+comment4.params=
+comment4.target=int\ creditosDefinidos()
+comment5.params=descripcion
+comment5.target=int\ creditos(java.lang.String)
+numComments=6

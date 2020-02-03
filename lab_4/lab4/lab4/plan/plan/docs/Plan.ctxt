@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Plan
+comment1.params=
+comment1.target=Plan()
+comment2.params=
+comment2.target=void\ adicione()
+comment2.text=\r\n\ Adiciona\ algunas\ materias\r\n
+comment3.params=id
+comment3.target=Actividad\ getInformacion(java.lang.String)
+comment3.text=\r\n\ Consulta\ la\ informaci\u00F3n\ de\ una\ actividad\r\n
+comment4.params=id\ creditos\ descripcion
+comment4.target=void\ adicione(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment4.text=\r\n\ Adiciona\ una\ nueva\ actividad\r\n
+comment5.params=subCadena
+comment5.target=java.util.ArrayList\ busque(java.lang.String)
+comment5.text=\r\n\ Consulta\ las\ actividades\ que\ contienen\ una\ informacion\r\n\ @param\ subCadena\ La\ informaci\u00F3n\ a\ buscar\r\n\ @return\ \r\n
+comment6.params=
+comment6.target=int\ numeroActividades()
+comment6.text=\r\n\ Consulta\ el\ numero\ de\ actividades\r\n\ @return\ \r\n
+comment7.params=
+comment7.target=java.lang.String\ toString()
+comment7.text=\r\n\ Consulta\ todas\ las\ actividades\r\n\ @return\ \r\n
+numComments=8
